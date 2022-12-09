@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<imusic version="1.0" tempo="90" timeSign="4/4" loopLength="4" showGUI="false" changeOnNext="2">
-  <arrangement id="A" src="audio/A.mp3"></arrangement>
-  <arrangement id="B" src="audio/B.mp3"></arrangement>			
+<imusic version="1.0" tempo="98" timeSign="4/4" loopLength="2">
+  <arrangement id="A">
+    <track select-group="intensity_guitar" select-value="1" src="audio/GuitarMarimba_A.mp3" selected="true"></track>
+    <track select-group="intensity_guitar" select-value="2" src="audio/GuitarMarimba_B.mp3"></track>
+    <track select-group="intensity_strings" select-value="1" src="audio/StringsChoir_A.mp3" selected="true"></track>
+    <track select-group="intensity_strings" select-value="2" src="audio/StringsChoir_B.mp3"></track>
+  </arrangement>
 </imusic>
