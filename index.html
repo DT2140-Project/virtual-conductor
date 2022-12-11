@@ -1,8 +1,17 @@
 <html>
   <div>
-    <button data-imusic-play="A">Loop A</button>
-    <button data-imusic-play="B">Loop B</button>
+    <button  onclick="iMusic.play();">PLAY</button>
     <button data-imusic="stop">STOP</button>
+  </div>
+  <div>
+    <button onclick="setIntensity('intensity_guitar', 1);">Guitar A</button>
+    <button onclick="setIntensity('intensity_guitar', 2);">Guitar B</button>
+    <button onclick="setIntensity('intensity_guitar', 0);">Guitar Off</button>
+  </div>
+  <div>
+    <button onclick="setIntensity('intensity_strings', 1);">Strings A</button>
+    <button onclick="setIntensity('intensity_strings', 2);">Strings B</button>
+    <button onclick="setIntensity('intensity_strings', 0);">Strings Off</button>
   </div>
 </html>
 
