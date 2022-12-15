@@ -3,6 +3,9 @@ const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 
+canvasElement.width = window.innerWidth;
+canvasElement.height = window.innerHeight;
+
 function onResults(results) {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);

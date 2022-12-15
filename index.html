@@ -16,26 +16,50 @@
 </head>
 <body>
 
-  <div>
-    <button  onclick="iMusic.play();">PLAY</button>
-    <button data-imusic="stop">STOP</button>
-  </div>
-  <div>
-    <button onclick="setIntensity('intensity_guitar', 1);">Guitar A</button>
-    <button onclick="setIntensity('intensity_guitar', 2);">Guitar B</button>
-    <button onclick="setIntensity('intensity_guitar', 0);">Guitar Off</button>
-  </div>
-  <div>
-    <button onclick="setIntensity('intensity_strings', 1);">Strings A</button>
-    <button onclick="setIntensity('intensity_strings', 2);">Strings B</button>
-    <button onclick="setIntensity('intensity_strings', 0);">Strings Off</button>
-  </div>
-
-  <div class="container">
+  <div class="video_container">
     <video class="input_video"></video>
-    <canvas class="output_canvas" width="1280px" height="504px"></canvas>
+    <canvas class="output_canvas"></canvas>
   </div>
 
+  <div class="imusic_interface">
+    <div>
+      <button onclick="iMusic.play();">PLAY</button>
+      <button data-imusic="stop">STOP</button>
+    </div>
+    <div>
+      <button onclick="setIntensity('intensity_guitar', 1);">Guitar A</button>
+      <button onclick="setIntensity('intensity_guitar', 2);">Guitar B</button>
+      <button onclick="setIntensity('intensity_guitar', 0);">Guitar Off</button>
+    </div>
+    <div>
+      <button onclick="setIntensity('intensity_strings', 1);">Strings A</button>
+      <button onclick="setIntensity('intensity_strings', 2);">Strings B</button>
+      <button onclick="setIntensity('intensity_strings', 0);">Strings Off</button>
+    </div>
+  </div>
+
+  <div class="instrument_grid">
+    <div class="instrument_row">
+      <div class="instrument_area">
+        <img class="instrument_image" src="images/guitar.svg" alt="Guitar"/>
+        <div class="instrument_status_indicator"></div>
+      </div>
+      <div class="instrument_area">
+        <img class="instrument_image" src="images/drums.svg" alt="Drums"/>
+        <div class="instrument_status_indicator"></div>
+      </div>
+    </div>
+    <div class="instrument_row">
+      <div class="instrument_area">
+        <img class="instrument_image" src="images/piano-top-view.svg" alt="Piano"/>
+        <div class="instrument_status_indicator"></div>
+      </div>
+      <div class="instrument_area">
+        <img class="instrument_image" src="images/bass-guitar.svg" alt="Bass Guitar"/>
+        <div class="instrument_status_indicator"></div>
+      </div>
+    </div>
+  </div>
     
 </body>
 
