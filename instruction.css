@@ -1,91 +1,70 @@
-.surprise{
-    position: absolute;
-      top: 83%;
-      left: 46%;
-      border-radius:50%;
+#instruction{
+    display: none;
 }
+
+#show{
+    background-color:red;
+    font-size: 20px;
+    position: relative;
+}
+
+#hide{
+    background-color:red;
+    font-size: 20px;
+    position: relative;
+}
+
 
 .leftarrow{
     position: absolute;
     top: 10%;
     left: 10%;
-      
 }
 
-h1{
-    color:yellow;
-    font-size: 40px;
-    text-align: center;
+.gesture_image{
+    width: 50px;
+    height: 50px;
 }
 
-/* table{
+table{
+    background-color: lightgreen;
     position: absolute;
-    top: 15%;
-    left: 32%;
-    width:500px;
+    top: 8%;
+    left: 10%;
+    width:1200px;
     font-size: 20px;
-} */
-
-/* th{
-    text-align: left;
 }
 
-td{
-    border: 1px solid #000;
-    border-collapse: collapse;
+th{
+    text-align: left;
 }
 
 th,td{
     padding: 10px;
 }
 
-h1{
-    font-size: 40px;
-    text-align: center;
-} */
-
 table,td{
-    border: 1px solid #000;
+    border: 1px solid black;
     border-collapse: collapse;
 }
 
-td{
-    padding: 15px;
+.table_caption{
+    font-size:40px;
 }
 
-#div1{
-    height:50px;
-    width:600px;
-    padding:0;
-    margin:0;
-    background-color: gray;
-}
-
-#table1{
-    text-align:center;
-    font-family:Arail;
-    font-size: 27pt;
-    width:600px;
-    color:white;
-    /* cellspacing:0px;
-    cellpadding:0px; */
-}
-
-#div2{
-    height:450px;
-    width:600px;
-    overflow:auto;
-    overflow-x:hidden;
-}
-
-#table2{
+.table_head{
     text-align:left;
     font-family:Arail;
-    font-size: 15pt;
+    font-size: 20pt;
+    width:600px;
+    color:white;
+}
+
+.table_content{
+    text-align:left;
+    font-family:Arail;
+    font-size: 12pt;
     width:600px;
     color:black;
     height: 100%;
-    
-    /* cellspacing:0px;
-    cellpadding:0px; */
 }
