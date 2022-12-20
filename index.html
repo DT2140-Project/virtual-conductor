@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="hands.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="style.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="instruction.css" crossorigin="anonymous">
+
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
@@ -28,14 +30,14 @@
       <button data-imusic="stop">STOP</button>
     </div>
     <div>
-      <button onclick="setIntensity('intensity_guitar', 1);">Guitar A</button>
-      <button onclick="setIntensity('intensity_guitar', 2);">Guitar B</button>
-      <button onclick="setIntensity('intensity_guitar', 0);">Guitar Off</button>
+      <button onclick="setIntensity(0, 1);">Guitar A</button>
+      <button onclick="setIntensity(0, 2);">Guitar B</button>
+      <button onclick="setIntensity(0, 0);">Guitar Off</button>
     </div>
     <div>
-      <button onclick="setIntensity('intensity_strings', 1);">Strings A</button>
-      <button onclick="setIntensity('intensity_strings', 2);">Strings B</button>
-      <button onclick="setIntensity('intensity_strings', 0);">Strings Off</button>
+      <button onclick="setIntensity(1, 1);">Strings A</button>
+      <button onclick="setIntensity(1, 2);">Strings B</button>
+      <button onclick="setIntensity(1, 0);">Strings Off</button>
     </div>
   </div>
 
@@ -44,24 +46,26 @@
     <div class="instrument_row">
       <div class="instrument_area">
         <img class="instrument_image" src="images/guitar.svg" alt="Guitar"/>
-        <div class="instrument_status_indicator"></div>
+        <div id="indicator_0" class="instrument_status_indicator">1</div>
       </div>
       <div class="instrument_area">
         <img class="instrument_image" src="images/drums.svg" alt="Drums"/>
-        <div class="instrument_status_indicator"></div>
+        <div id="indicator_1" class="instrument_status_indicator">1</div>
       </div>
     </div>
     <div class="instrument_row">
       <div class="instrument_area">
         <img class="instrument_image" src="images/piano-top-view.svg" alt="Piano"/>
-        <div class="instrument_status_indicator"></div>
+        <div id="indicator_2" class="instrument_status_indicator">1</div>
       </div>
       <div class="instrument_area">
         <img class="instrument_image" src="images/bass-guitar.svg" alt="Bass Guitar"/>
-        <div class="instrument_status_indicator"></div>
+        <div id="indicator_3" class="instrument_status_indicator">1</div>
       </div>
     </div>
   </div>
+
+
   
   <!-- <button class="click">Instruction</button> -->
 
@@ -117,13 +121,13 @@
   
 
 
-
-
 </body>
 
 </html>
-<script type="module" src="hands.js"></script>
+<script type="module" src="hand_gestures.js"></script>
 <script src="imusic_091.js" data-music-structure="imusic.xml"></script>
-<script src="my.js"></script>
+
+<script src="music_actions.js"></script>
 <script src="instruction.js"></script>
+
 
