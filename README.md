@@ -19,3 +19,6 @@ This will give you a folder called **virtual-conductor** where all the developme
 
 The simplest way to host a local server is by using chrome and the chrome extension Web Server for Chrome, which you can find [here](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb/related?pli=1). Add the chrome extension and start it up, selecting the **virtual-conductor** folder from the previous part as the folder you're hosting.
 Then you should be able to visit the Web Server URL [http://127.0.0.1:8887](http://127.0.0.1:8887) to view the web app locally.
+
+
+⚠ If after starting the server and granting webcam permissions the local webpage displays the error "Failed to acquire camera feed: NotReadableError: Could not start video source", restart the whole browser and try again. Permissions should be updated on reloading and camera should start automatically on opening the page.

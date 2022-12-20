@@ -3,7 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+
     <link rel="stylesheet" type="text/css" href="style.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="instruction.css" crossorigin="anonymous">
+
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
@@ -38,6 +41,7 @@
     </div>
   </div>
 
+
   <div class="instrument_grid">
     <div class="instrument_row">
       <div class="instrument_area">
@@ -60,10 +64,70 @@
       </div>
     </div>
   </div>
+
+
+  
+  <!-- <button class="click">Instruction</button> -->
+
+<div>
+  <p><button id="show" onclick="show()">Instruction</button></p>
+  <div id="instruction">
+    <!-- <img src="images/back.svg" class="leftarrow" style="width:50px;height:50px;"> -->
+    <table>
+      <tr>
+      <th class="table_head">Gesture</th>
+      <th class="table_head">Action</th>
+      </tr>
+      <tr class="table_content">
+          <td>Pinch<img src="images/pinch.svg" class="gesture_image" ></td>
+          <td>Start</td>
+      </tr>
+      <tr class="table_content">
+          <td>Thumbs up<img src="images/up.svg"  class="gesture_image" ></td>
+          <td>Turn on instrument </td>
+      </tr>
+      <tr class="table_content">
+          <td>Thumbs down<img src="images/down.svg"  class="gesture_image" ></td>
+          <td>Turn off instrument</td>
+      </tr>
+      <tr class="table_content">
+          <td>Closed fist<img src="images/fist.svg"  class="gesture_image" ></td>
+          <td>Intensity up</td>
+      </tr>
+      <tr class="table_content">
+          <td>Open palm<img src="images/palm.svg"  class="gesture_image" ></td>
+          <td>Intensity down</td>
+      </tr>
+      <tr class="table_content">
+          <td>V-sign<img src="images/V1.svg"  class="gesture_image" > <img src="images/V2.svg"  class="gesture_image" ></td>
+          <td>Play a soothing track</td>
+      </tr>
+      <tr class="table_content">
+          <td>Pointing in a direction<img src="images/pointer.svg"  class="gesture_image" ></td>
+          <td>
+              <p>Switch track:</p>
+              <ol>
+              <li>Up → first</li>
+              <li>Down → last</li>
+              <li>Right → next</li>
+              <li>Left → previous</li>
+              </ol>
+              </td>
+      </tr>
+      </table>
+      <p><button id="hide" onclick="hide()">Back</button></p>
+  </div>
+</div>
+  
+
+
 </body>
 
 </html>
 <script type="module" src="hand_gestures.js"></script>
 <script src="imusic_091.js" data-music-structure="imusic.xml"></script>
+
 <script src="music_actions.js"></script>
+<script src="instruction.js"></script>
+
 

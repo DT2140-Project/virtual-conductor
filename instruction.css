@@ -1,0 +1,70 @@
+#instruction{
+    display: none;
+}
+
+#show{
+    background-color:red;
+    font-size: 20px;
+    position: relative;
+}
+
+#hide{
+    background-color:red;
+    font-size: 20px;
+    position: relative;
+}
+
+
+.leftarrow{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+.gesture_image{
+    width: 50px;
+    height: 50px;
+}
+
+table{
+    background-color: lightgreen;
+    position: absolute;
+    top: 8%;
+    left: 10%;
+    width:1200px;
+    font-size: 20px;
+}
+
+th{
+    text-align: left;
+}
+
+th,td{
+    padding: 10px;
+}
+
+table,td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.table_caption{
+    font-size:40px;
+}
+
+.table_head{
+    text-align:left;
+    font-family:Arail;
+    font-size: 20pt;
+    width:600px;
+    color:white;
+}
+
+.table_content{
+    text-align:left;
+    font-family:Arail;
+    font-size: 12pt;
+    width:600px;
+    color:black;
+    height: 100%;
+}
