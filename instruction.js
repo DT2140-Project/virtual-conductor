@@ -1,11 +1,11 @@
-function show(){
-    document.getElementById('instruction').style.height="400px"
-    document.getElementById('instruction').style.display="block"
-    document.getElementById('show').style.display="none"
-}
-
-function hide(){
-    document.getElementById('instruction').style.height="400px"
-    document.getElementById('instruction').style.display="none"
-    document.getElementById('show').style.display="inline"
+function toggleInstructions() {
+    var instructionsContainer = document.getElementById("instructionsContainer");
+    var toggleInstructionsButton = document.getElementById("toggleInstructionsButton")
+    if (instructionsContainer.style.display === "none") {
+        instructionsContainer.style.display = "grid";
+        toggleInstructionsButton.innerHTML = "Hide"
+    } else {
+        instructionsContainer.style.display = "none";
+        toggleInstructionsButton.innerHTML = "Instructions"
+    }
 }
