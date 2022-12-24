@@ -55,6 +55,10 @@ body {
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
+.targeted {
+  border: 5px solid rgb(47, 158, 255);
+}
+
 .instrument_image {
   height: 50%;
   width: auto;

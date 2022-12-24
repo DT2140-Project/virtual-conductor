@@ -17,12 +17,14 @@ function onResults(results) {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
     canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+    hideTargetIndicators()
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
         startPlaying()
         // Origin (x=0, y=0) is the upper right corner
         for (const landmarks of results.multiHandLandmarks) {
             const gesture = parseHandGesture(landmarks);
-            const instrumentIndex = getTargetedIndex(landmarks[0]);
+            const instrumentIndex = getTargetedIndex(landmarks[9]);
+            showTargetIndicator(instrumentIndex)
             gesture.action(instrumentIndex);
             drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
                         {color: gesture.color, lineWidth: 5});
@@ -56,9 +58,9 @@ const Gestures = {
     }},
 }
 
-function getTargetedIndex(wristJoint) {
-    const x = wristJoint.x
-    const y = wristJoint.y
+function getTargetedIndex(middleJoint) {
+    const x = middleJoint.x
+    const y = middleJoint.y
     if (x <= 0.5) {
         if (y <= 0.5) {
             return 1
@@ -72,6 +74,19 @@ function getTargetedIndex(wristJoint) {
             return 2
         }
     }
+}
+
+function hideTargetIndicators() {
+    var previouslyTargeted = document.getElementsByClassName("instrument_area targeted")
+
+    Array.prototype.forEach.call(previouslyTargeted, function(targeted) {
+        // Do stuff here
+        targeted.classList.remove("targeted")
+    });
+}
+
+function showTargetIndicator(index) {
+    document.getElementById(`instrument_area_${index}`).classList.add("targeted")
 }
 
 function parseHandGesture(landmarks) {
