@@ -19,7 +19,6 @@ function onResults(results) {
     canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
     hideTargetIndicators()
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-        startPlaying()
         // Origin (x=0, y=0) is the upper right corner
         for (const landmarks of results.multiHandLandmarks) {
             const gesture = parseHandGesture(landmarks);
@@ -42,6 +41,7 @@ const Gestures = {
 
     }},
     thumbUp: {color: "#00FF00", action: function(instrumentIndex) {
+        startPlaying()
         turnOn(instrumentIndex)
     }},
     thumbDown: {color: "#FF0000", action: function(instrumentIndex) {
