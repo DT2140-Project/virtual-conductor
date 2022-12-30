@@ -7,6 +7,19 @@
     height: 100%;
 }
 
+#introductionScreen{
+    background-color: black;
+    min-width: fit-content;
+    height: 100vh;
+    width: 100vw;
+    padding: 2em;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #instructions{
     background-color: black;
     min-width: fit-content;
@@ -56,7 +69,7 @@ th,td{
     padding: 10px;
 }
 
-#dismissButton {
+.dismissButton {
     margin-top: 2em;
     border-radius: 1em;
     border: 1px outset white;
@@ -66,7 +79,7 @@ th,td{
     place-items: center;
 }
 
-#dismissButton:hover {
+.dismissButton:hover {
     cursor: pointer;
 }
 
