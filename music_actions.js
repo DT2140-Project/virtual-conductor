@@ -23,6 +23,18 @@ function setIntensity(instrumentIndex, intensity) {
   if (instrument.isPlaying) iMusic.select(`intensity_${instrumentIndex}`, intensity);
 }
 
+function setVolume(instrumentIndex, volume) {
+  iMusic(`instr_${instrumentIndex}`).set("volume", volume);
+  const volumeInPercent = Math.round(volume*100)
+  const volumeBarContainer = document.getElementById(
+    `volume_${instrumentIndex}`
+  )
+  const volumeBar = volumeBarContainer.getElementsByClassName("volume_bar")[0]
+  const volumeNum = volumeBarContainer.getElementsByClassName("volume_num")[0]
+  volumeNum.innerHTML = `${volumeInPercent}`
+  volumeBar.style.height = `${volumeInPercent}%`
+}
+
 function turnOff(instrumentIndex) {
   instruments[instrumentIndex].isPlaying = false;
   iMusic.select(`intensity_${instrumentIndex}`, 0);

@@ -1,19 +1,21 @@
-
-const videoElement = document.getElementsByClassName('input_video')[0];
-const canvasElement = document.getElementsByClassName('output_canvas')[0];
-const canvasCtx = canvasElement.getContext('2d');
-const indicator = document.getElementById('indicator');
+const videoElement = document.getElementsByClassName("input_video")[0];
+const canvasElement = document.getElementsByClassName("output_canvas")[0];
+const canvasCtx = canvasElement.getContext("2d");
+const indicator = document.getElementById("indicator");
+var pinchStart = 0.0
+var isPinching = false
 
 adjustVideoCanvasToWindowSize();
 
 function adjustVideoCanvasToWindowSize() {
-    canvasElement.width = window.innerWidth;
-    canvasElement.height = window.innerHeight;
+  canvasElement.width = window.innerWidth;
+  canvasElement.height = window.innerHeight;
 }
 
 window.onresize = adjustVideoCanvasToWindowSize;
 
 function onResults(results) {
+
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
     canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
@@ -29,8 +31,10 @@ function onResults(results) {
                         {color: gesture.color, lineWidth: 5});
             drawLandmarks(canvasCtx, landmarks, {color: '#000000', lineWidth: 2});
         }
+
     }
-    canvasCtx.restore();
+  }
+  canvasCtx.restore();
 }
 
 const Gestures = {
@@ -58,155 +62,306 @@ const Gestures = {
     }},
 }
 
+
 function getTargetedIndex(middleJoint) {
-    const x = middleJoint.x
-    const y = middleJoint.y
-    if (x <= 0.5) {
-        if (y <= 0.5) {
-            return 1
-        } else {
-            return 3
-        }
+  const x = middleJoint.x;
+  const y = middleJoint.y;
+  if (x <= 0.5) {
+    if (y <= 0.5) {
+      return 1;
     } else {
-        if (y <= 0.5) {
-            return 0
-        } else {
-            return 2
-        }
+      return 3;
     }
+  } else {
+    if (y <= 0.5) {
+      return 0;
+    } else {
+      return 2;
+    }
+  }
 }
 
 function hideTargetIndicators() {
-    var previouslyTargeted = document.getElementsByClassName("instrument_area targeted")
+  var previouslyTargeted = document.getElementsByClassName(
+    "instrument_area targeted"
+  );
 
-    Array.prototype.forEach.call(previouslyTargeted, function(targeted) {
-        // Do stuff here
-        targeted.classList.remove("targeted")
-    });
+  Array.prototype.forEach.call(previouslyTargeted, function (targeted) {
+    targeted.classList.remove("targeted");
+  });
 }
 
 function showTargetIndicator(index) {
-    document.getElementById(`instrument_area_${index}`).classList.add("targeted")
+  document.getElementById(`instrument_area_${index}`).classList.add("targeted");
 }
 
 function parseHandGesture(landmarks) {
-    const thumb = landmarks[4];
-    const indexJoint = landmarks[5];
-    const index = landmarks[8];
-    const middleJoint = landmarks[9];
-    const middle = landmarks[12];
-    const ringJoint = landmarks[13];
-    const ring = landmarks[16];
-    const littleJoint = landmarks[17];
-    const little = landmarks[20];
+  const thumb = landmarks[4];
+  const indexJoint = landmarks[5];
+  const index = landmarks[8];
+  const middleJoint = landmarks[9];
+  const middle = landmarks[12];
+  const ringJoint = landmarks[13];
+  const ring = landmarks[16];
+  const littleJoint = landmarks[17];
+  const little = landmarks[20];
 
-    const distIndexJointToThumb = getLandmarkDistance(indexJoint, thumb);
-    const distIndexToThumb = getLandmarkDistance(index, thumb);
-    const distIndexJointToIndex = getLandmarkDistance(indexJoint, index);
-    const distMiddleJointToMiddle = getLandmarkDistance(middleJoint, middle);
-    const distRingJointToRing = getLandmarkDistance(ringJoint, ring);
-    const distLittleJointToLittle = getLandmarkDistance(littleJoint, little);
+  const distIndexJointToThumb = getLandmarkDistance(indexJoint, thumb);
+  const distIndexToThumb = getLandmarkDistance(index, thumb);
+  const distIndexJointToIndex = getLandmarkDistance(indexJoint, index);
+  const distMiddleJointToMiddle = getLandmarkDistance(middleJoint, middle);
+  const distRingJointToRing = getLandmarkDistance(ringJoint, ring);
+  const distLittleJointToLittle = getLandmarkDistance(littleJoint, little);
+  const indexIsUpright = isUpright(index, indexJoint);
+  const middleIsUpright = isUpright(middle, middleJoint);
+  const ringIsUpright = isUpright(ring, ringJoint);
+  const littleIsUpright = isUpright(little, littleJoint);
 
-    if (isThumbGesture(distIndexJointToThumb, distIndexJointToIndex, distMiddleJointToMiddle, distRingJointToRing, distLittleJointToLittle)) {
-        if (isThumbsUpIfThumbGesture(thumb, indexJoint)) {
-            return Gestures.thumbDown;
-        }
-        if (isThumbsDownIfThumbGesture(thumb, indexJoint)) {
-            return Gestures.thumbUp;
-        }
-    }
+  if (
+    isPinch(
+      distIndexToThumb,
+      distMiddleJointToMiddle,
+      distRingJointToRing,
+      distLittleJointToLittle,
+      middleIsUpright,
+      ringIsUpright,
+      littleIsUpright
+    )
+  ) {
+    return Gestures.pinch;
+  }
 
-    if (isCountOne(distIndexJointToThumb, distIndexJointToIndex, distMiddleJointToMiddle, distRingJointToRing, distLittleJointToLittle)) {
-        return Gestures.countOne;
+  if (
+    isThumbGesture(
+      distIndexJointToThumb,
+      distIndexJointToIndex,
+      distMiddleJointToMiddle,
+      distRingJointToRing,
+      distLittleJointToLittle
+    )
+  ) {
+    if (isUpright(thumb, indexJoint)) {
+      return Gestures.thumbUp;
     }
-    if (isCountTwo(distIndexJointToThumb, distIndexJointToIndex, distMiddleJointToMiddle, distRingJointToRing, distLittleJointToLittle)) {
-        return Gestures.countTwo;
+    if (isDownright(thumb, indexJoint)) {
+      return Gestures.thumbDown;
     }
-    if (isCountThree(distIndexJointToThumb, distIndexJointToIndex, distMiddleJointToMiddle, distRingJointToRing, distLittleJointToLittle)) {
-        return Gestures.countThree;
-    }
+  }
 
-    return Gestures.none
+  if (
+    isCountOne(
+      distIndexJointToThumb,
+      distIndexJointToIndex,
+      distMiddleJointToMiddle,
+      distRingJointToRing,
+      distLittleJointToLittle,
+      indexIsUpright
+    )
+  ) {
+    return Gestures.countOne;
+  }
+  if (
+    isCountTwo(
+      distIndexJointToThumb,
+      distIndexJointToIndex,
+      distMiddleJointToMiddle,
+      distRingJointToRing,
+      distLittleJointToLittle,
+      indexIsUpright,
+      middleIsUpright
+    )
+  ) {
+    return Gestures.countTwo;
+  }
+  if (
+    isCountThree(
+      distIndexJointToThumb,
+      distIndexJointToIndex,
+      distMiddleJointToMiddle,
+      distRingJointToRing,
+      distLittleJointToLittle,
+      indexIsUpright,
+      middleIsUpright,
+      ringIsUpright
+    )
+  ) {
+    return Gestures.countThree;
+  }
+
+  return Gestures.none;
 }
 
-function isPinch(distIndexToThumb) {
-    return distIndexToThumb < 0.05
+function isPinch(
+  distIndexToThumb,
+  distMiddleJointToMiddle,
+  distRingJointToRing,
+  distLittleJointToLittle,
+  middleIsUpright,
+  ringIsUpright,
+  littleIsUpright
+) {
+  const shouldBeApart = new Array(
+    distMiddleJointToMiddle,
+    distRingJointToRing,
+    distLittleJointToLittle
+  );
+  return (
+    distIndexToThumb < 0.05 &&
+    shouldBeApart.every(isApart) &&
+    middleIsUpright &&
+    ringIsUpright &&
+    littleIsUpright
+  );
 }
 
-function isThumbGesture(distIndexJointToThumb, distIndexJointToIndex, distMiddleJointToMiddle, distRingJointToRing, distLittleJointToLittle) {
-    const shouldBeAdjacent = new Array(distIndexJointToIndex, distMiddleJointToMiddle, distRingJointToRing, distLittleJointToLittle);
-    if (shouldBeAdjacent.every(isAdjacent) && distIndexJointToThumb > 0.15) {
-        return true
-    }
-    return false
+function isThumbGesture(
+  distIndexJointToThumb,
+  distIndexJointToIndex,
+  distMiddleJointToMiddle,
+  distRingJointToRing,
+  distLittleJointToLittle
+) {
+  const shouldBeAdjacent = new Array(
+    distIndexJointToIndex,
+    distMiddleJointToMiddle,
+    distRingJointToRing,
+    distLittleJointToLittle
+  );
+  if (shouldBeAdjacent.every(isAdjacent) && distIndexJointToThumb > 0.15) {
+    return true;
+  }
+  return false;
 }
 
-function isThumbsUpIfThumbGesture(thumb, indexJoint) {
-    return thumb.y-indexJoint.y > 0.08
+function isCountOne(
+  distIndexJointToThumb,
+  distIndexJointToIndex,
+  distMiddleJointToMiddle,
+  distRingJointToRing,
+  distLittleJointToLittle,
+  indexIsUpright
+) {
+  const shouldBeAdjacent = new Array(
+    distIndexJointToThumb,
+    distMiddleJointToMiddle,
+    distRingJointToRing,
+    distLittleJointToLittle
+  );
+  if (
+    shouldBeAdjacent.every(isAdjacent) &&
+    isApart(distIndexJointToIndex && indexIsUpright)
+  ) {
+    return true;
+  }
+  return false;
 }
 
-function isThumbsDownIfThumbGesture(thumb, indexJoint) {
-    return thumb.y-indexJoint.y < -0.08
+function isCountTwo(
+  distIndexJointToThumb,
+  distIndexJointToIndex,
+  distMiddleJointToMiddle,
+  distRingJointToRing,
+  distLittleJointToLittle,
+  indexIsUpright,
+  middleIsUpright
+) {
+  const shouldBeAdjacent = new Array(
+    distIndexJointToThumb,
+    distRingJointToRing,
+    distLittleJointToLittle
+  );
+  const shouldBeApart = new Array(
+    distIndexJointToIndex,
+    distMiddleJointToMiddle
+  );
+  if (
+    shouldBeAdjacent.every(isAdjacent) &&
+    shouldBeApart.every(isApart) &&
+    indexIsUpright &&
+    middleIsUpright
+  ) {
+    return true;
+  }
+  return false;
 }
 
-function isCountOne(distIndexJointToThumb, distIndexJointToIndex, distMiddleJointToMiddle, distRingJointToRing, distLittleJointToLittle) {
-    const shouldBeAdjacent = new Array(distIndexJointToThumb, distMiddleJointToMiddle, distRingJointToRing, distLittleJointToLittle);
-    if (shouldBeAdjacent.every(isAdjacent) && isApart(distIndexJointToIndex)) {
-        return true
-    }
-    return false
+function isCountThree(
+  distIndexJointToThumb,
+  distIndexJointToIndex,
+  distMiddleJointToMiddle,
+  distRingJointToRing,
+  distLittleJointToLittle,
+  indexIsUpright,
+  middleIsUpright,
+  ringIsUpright
+) {
+  const shouldBeAdjacent = new Array(
+    distIndexJointToThumb,
+    distLittleJointToLittle
+  );
+  const shouldBeApart = new Array(
+    distIndexJointToIndex,
+    distMiddleJointToMiddle,
+    distRingJointToRing
+  );
+  if (
+    shouldBeAdjacent.every(isAdjacent) &&
+    shouldBeApart.every(isApart) &&
+    indexIsUpright &&
+    middleIsUpright &&
+    ringIsUpright
+  ) {
+    return true;
+  }
+  return false;
 }
 
-function isCountTwo(distIndexJointToThumb, distIndexJointToIndex, distMiddleJointToMiddle, distRingJointToRing, distLittleJointToLittle) {
-    const shouldBeAdjacent = new Array(distIndexJointToThumb, distRingJointToRing, distLittleJointToLittle);
-    const shouldBeApart = new Array(distIndexJointToIndex, distMiddleJointToMiddle);
-    if (shouldBeAdjacent.every(isAdjacent) && shouldBeApart.every(isApart)) {
-        return true
-    }
-    return false
+function isUpright(tip, joint) {
+  return tip.y - joint.y < -0.1;
 }
 
-function isCountThree(distIndexJointToThumb, distIndexJointToIndex, distMiddleJointToMiddle, distRingJointToRing, distLittleJointToLittle) {
-    const shouldBeAdjacent = new Array(distIndexJointToThumb, distLittleJointToLittle);
-    const shouldBeApart = new Array(distIndexJointToIndex, distMiddleJointToMiddle, distRingJointToRing);
-    if (shouldBeAdjacent.every(isAdjacent) && shouldBeApart.every(isApart)) {
-        return true
-    }
-    return false
+function isDownright(tip, joint) {
+  return tip.y - joint.y > 0.1;
 }
 
 function isAdjacent(distance) {
-    return distance < 0.1;
+  return distance < 0.1;
 }
 
 function isApart(distance) {
-    return distance > 0.15;
+  return distance > 0.15;
 }
 
 function getLandmarkDistance(landmarkA, landmarkB) {
-    const distX = landmarkA.x - landmarkB.x
-    const distY = landmarkA.y - landmarkB.y
-    return Math.hypot(distX, distY)
+  const distX = landmarkA.x - landmarkB.x;
+  const distY = landmarkA.y - landmarkB.y;
+  return Math.hypot(distX, distY);
 }
 
-const hands = new Hands({locateFile: (file) => {
+function getRelativeHeight(instrumentIndex, landmark) {
+    const lowerBound = (instrumentIndex < 2) ? 0 : 0.5
+    const landMarkHeight = landmark.y
+    return 1 - ((landMarkHeight - lowerBound) / 0.5)
+}
+
+const hands = new Hands({
+  locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-  }});
-  hands.setOptions({
-    maxNumHands: 2,
-    modelComplexity: 0,
-    minDetectionConfidence: 0.5,
-    minTrackingConfidence: 0.5
-  });
-  hands.onResults(onResults);
-  
+  },
+});
+hands.setOptions({
+  maxNumHands: 2,
+  modelComplexity: 0,
+  minDetectionConfidence: 0.7,
+  minTrackingConfidence: 0.7,
+});
+hands.onResults(onResults);
+
 const camera = new Camera(videoElement, {
-    onFrame: async () => {
-      await hands.send({image: videoElement});
-    },
-    width: 1280,
-    height: 720
+  onFrame: async () => {
+    await hands.send({ image: videoElement });
+  },
+  width: 1280,
+  height: 720,
 });
 camera.start();
-
-
