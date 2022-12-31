@@ -16,23 +16,6 @@
       crossorigin="anonymous"
     />
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
-      crossorigin="anonymous"
-    ></script>
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Virtual Conductor</title>
@@ -44,89 +27,20 @@
     />
   </head>
   <body>
-    <div class="video_container">
-      <video class="input_video"></video>
-      <canvas class="output_canvas"></canvas>
-    </div>
 
-    <div class="imusic_interface">
-      <div>
-        <button onclick="iMusic.play();">PLAY</button>
-        <button data-imusic="stop">STOP</button>
-      </div>
-      <div>
-        <button onclick="setIntensity(0, 1);">Guitar A</button>
-        <button onclick="setIntensity(0, 2);">Guitar B</button>
-        <button onclick="setIntensity(0, 0);">Guitar Off</button>
-      </div>
-      <div>
-        <button onclick="setIntensity(1, 1);">Strings A</button>
-        <button onclick="setIntensity(1, 2);">Strings B</button>
-        <button onclick="setIntensity(1, 0);">Strings Off</button>
-      </div>
-    </div>
+    <div id="introductionScreen">
+      <h2>Virtual Conductor</h2>
+      <h4>Setup</h4>
+      <p>To ensure that your hand gestures are recognised, keep your hands at a distance of about 50cm (20 inches) from the camera. <br />
+        Make sure to avoid bright lights in the background, as they could interfere with the gesture recognition.</p>
+      <h4>Instructions</h4>
 
-    <div class="instrument_grid">
-      <div class="instrument_row">
-        <div class="instrument_area" id="instrument_area_0">
-          <img class="instrument_image" src="images/guitar.svg" alt="Guitar" />
-          <div id="indicator_0" class="instrument_status_indicator">1</div>
-          <div id="volume_0" class="volume_bar_container">
-            <div class="volume_num">50</div> 
-            <div class="volume_bar"></div>
-          </div>
-        </div>
-        <div class="instrument_area" id="instrument_area_1">
-          <img class="instrument_image" src="images/drums.svg" alt="Drums" />
-          <div id="indicator_1" class="instrument_status_indicator">1</div>
-          <div id="volume_1" class="volume_bar_container">
-            <div class="volume_num">50</div> 
-            <div class="volume_bar"></div>
-          </div>
-        </div>
-      </div>
-      <div class="instrument_row">
-        <div class="instrument_area" id="instrument_area_2">
-          <img
-            class="instrument_image"
-            src="images/piano-top-view.svg"
-            alt="Piano"
-          />
-          <div id="indicator_2" class="instrument_status_indicator">1</div>
-          <div id="volume_2" class="volume_bar_container">
-            <div class="volume_num">50</div> 
-            <div class="volume_bar"></div>
-          </div>
-        </div>
-        <div class="instrument_area" id="instrument_area_3">
-          <img
-            class="instrument_image"
-            src="images/bass-guitar.svg"
-            alt="Bass Guitar"
-          />
-          <div id="indicator_3" class="instrument_status_indicator">1</div>
-          <div id="volume_3" class="volume_bar_container">
-            <div class="volume_num">50</div> 
-            <div class="volume_bar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="instructionsContainer">
-      <div id="instructions" onclick="toggleInstructions()">
-        <h2>Instructions</h2>
-        <p>
-          Move your hand into the view of the camera to start all instruments.
-        </p>
         <p>
           Control each instrument separately by making hand gestures inside the
-          rectangle area belonging to that instrument.
-        </p>
-        <p>
+          rectangle area belonging to that instrument. <br />
           The color of the circles in the corners of each area indicate whether
-          the instrument is playing, using red/green color.<br/>The number indicates
-          which intensity they are playing at.
+          the instrument is playing, using red/green color.<br />The number
+          indicates which style they are playing in.
         </p>
         <table>
           <tr>
@@ -161,19 +75,8 @@
           </tr>
         </table>
 
-        <div id="dismissButton">Dismiss</div>
-      </div>
-    </div>
+        <div class="dismissButton"  onclick="location.href='./conductor.html'">Start</div>
 
-    <div>
-      <button id="toggleInstructionsButton" onclick="toggleInstructions()">
-        Instructions
-      </button>
     </div>
   </body>
 </html>
-<script type="module" src="hand_gestures.js"></script>
-<script src="imusic_091.js" data-music-structure="imusic.xml"></script>
-
-<script src="music_actions.js"></script>
-<script src="instruction.js"></script>
