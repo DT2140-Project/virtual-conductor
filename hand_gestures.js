@@ -15,72 +15,53 @@ function adjustVideoCanvasToWindowSize() {
 window.onresize = adjustVideoCanvasToWindowSize;
 
 function onResults(results) {
-  canvasCtx.save();
-  canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-  canvasCtx.drawImage(
-    results.image,
-    0,
-    0,
-    canvasElement.width,
-    canvasElement.height
-  );
-  hideTargetIndicators();
-  if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-    startPlaying();
-    // Origin (x=0, y=0) is the upper right corner
-    for (const landmarks of results.multiHandLandmarks) {
-      const gesture = parseHandGesture(landmarks);
-      const indicativeLandMark = gesture == Gestures.pinch ? landmarks[8] : landmarks[9]
-      const instrumentIndex = getTargetedIndex(indicativeLandMark)
-      showTargetIndicator(instrumentIndex);
-      if (gesture == Gestures.pinch) {
-        const volume = getRelativeHeight(instrumentIndex, indicativeLandMark)
-        gesture.action(instrumentIndex, volume)
-      } else {
-        gesture.action(instrumentIndex);
-      }
-      drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
-        color: gesture.color,
-        lineWidth: 5,
-      });
-      drawLandmarks(canvasCtx, landmarks, { color: "#000000", lineWidth: 2 });
+
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+    hideTargetIndicators()
+    if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        // Origin (x=0, y=0) is the upper right corner
+        for (const landmarks of results.multiHandLandmarks) {
+            const gesture = parseHandGesture(landmarks);
+            const instrumentIndex = getTargetedIndex(landmarks[9]);
+            showTargetIndicator(instrumentIndex)
+            gesture.action(instrumentIndex);
+            drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
+                        {color: gesture.color, lineWidth: 5});
+            drawLandmarks(canvasCtx, landmarks, {color: '#000000', lineWidth: 2});
+        }
+
     }
   }
   canvasCtx.restore();
 }
 
 const Gestures = {
-  none: { color: "#FFFFFF", action: function (instrumentIndex) {} },
-  pinch: { color: "#0000FF", action: function (instrumentIndex, volume) {
-    console.log("Set volume of " + instrumentIndex + " to " + volume);
-    setVolume(instrumentIndex, volume)
-  } },
-  thumbUp: {
-    color: "#00FF00",
-    action: function (instrumentIndex) {
-      turnOn(instrumentIndex);
-    },
-  },
-  thumbDown: {
-    color: "#FF0000",
-    action: function (instrumentIndex) {
-      turnOff(instrumentIndex);
-    },
-  },
-  countOne: {
-    color: "#FFFF00",
-    action: function (instrumentIndex) {
-      setIntensity(instrumentIndex, 1);
-    },
-  },
-  countTwo: {
-    color: "#00FFFF",
-    action: function (instrumentIndex) {
-      setIntensity(instrumentIndex, 2);
-    },
-  },
-  countThree: { color: "#FF00FF", action: function (instrumentIndex) {} },
-};
+    none: {color: "#FFFFFF", action: function(instrumentIndex) {
+        
+    }},
+    pinch: {color: "#FFFF00", action: function(instrumentIndex) {
+
+    }},
+    thumbUp: {color: "#00FF00", action: function(instrumentIndex) {
+        startPlaying()
+        turnOn(instrumentIndex)
+    }},
+    thumbDown: {color: "#FF0000", action: function(instrumentIndex) {
+        turnOff(instrumentIndex)
+    }},
+    countOne: {color: "#FFFF00", action: function(instrumentIndex) {
+        setIntensity(instrumentIndex, 1);
+    }},
+    countTwo: {color: "#00FFFF", action: function(instrumentIndex) {
+        setIntensity(instrumentIndex, 2);
+    }},
+    countThree: {color: "#FF00FF", action: function(instrumentIndex) {
+        
+    }},
+}
+
 
 function getTargetedIndex(middleJoint) {
   const x = middleJoint.x;
