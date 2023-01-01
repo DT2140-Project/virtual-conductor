@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <imusic version="1.0" tempo="75" audioPath="audio" suffix="mp3" timeSign="4/4" loopLength="4" showGUI="false">
     <arrangement id="A">
-
-        <track select-group="intensity_0" select-value="0" src="silence" selected="true"></track>
-        <track fadeTime="100" select-group="intensity_0" select-value="1" >
-
+        <track tags="instr_0" fadeTime="100" select-group="intensity_0" select-value="0" src="silence" selected="true" volume="0.5"></track>
+        <track tags="instr_0" fadeTime="100" select-group="intensity_0" select-value="1" volume="0.5">
             <region src="guitar_1_1"></region>
             <region src="guitar_1_2"></region>
             <region src="guitar_1_3"></region>
             <region src="guitar_1_4"></region>
         </track>
-
-        <track fadeTime="100" select-group="intensity_0" select-value="2">
-
+        <track tags="instr_0" fadeTime="100" select-group="intensity_0" select-value="2" volume="0.5">
             <region src="guitar_2_1"></region>
             <region src="guitar_2_2"></region>
             <region src="guitar_2_3"></region>
             <region src="guitar_2_4"></region>
         </track>
-
-        <track select-group="intensity_1" select-value="0" src="silence" selected="true"></track>
-        <track fadeTime="100" select-group="intensity_1" select-value="1" src="drums_1"></track>
-        <track fadeTime="100" select-group="intensity_1" select-value="2" src="drums_2"></track>
-        <track select-group="intensity_2" select-value="0" src="silence" selected="true"></track>
-        <track fadeTime="100" select-group="intensity_2" select-value="1" src="piano_1"></track>
-        <track fadeTime="200" select-group="intensity_2" select-value="2">
-
+        <track tags="instr_1" fadeTime="100" select-group="intensity_1" select-value="0" src="silence" selected="true"></track>
+        <track tags="instr_1" fadeTime="100" select-group="intensity_1" select-value="1" src="drums_1" volume="0.5"></track>
+        <track tags="instr_1" fadeTime="100" select-group="intensity_1" select-value="2" src="drums_2" volume="0.5"></track>
+        <track tags="instr_2" fadeTime="100" select-group="intensity_2" select-value="0" src="silence" selected="true" volume="0.5"></track>
+        <track tags="instr_2" fadeTime="100" select-group="intensity_2" select-value="1" src="piano_1" selected="true" volume="0.5"></track>
+        <track tags="instr_2" fadeTime="200" select-group="intensity_2" select-value="2" volume="0.5">
             <region src="piano_2_1"></region>
             <region src="piano_2_2"></region>
             <region src="piano_2_3"></region>
             <region src="piano_2_4"></region>
         </track>
-
-        <track select-group="intensity_3" select-value="0" src="silence" selected="true"></track>
-        <track fadeTime="100" select-group="intensity_3" select-value="1">
-
+        <track tags="instr_3" fadeTime="100" select-group="intensity_3" select-value="0" src="silence" selected="true" volume="0.5"></track>
+        <track tags="instr_3" fadeTime="100" select-group="intensity_3" select-value="1" selected="true" volume="0.5">
             <region src="bass_1_1"></region>
             <region src="bass_1_2"></region>
             <region src="bass_1_3"></region>
             <region src="bass_1_4"></region>
         </track>
-
-        <track fadeTime="100" select-group="intensity_3" select-value="2">
-
+        <track tags="instr_3" fadeTime="100" select-group="intensity_3" select-value="2" volume="0.5">
             <region src="bass_2_1"></region>
             <region src="bass_2_2"></region>
             <region src="bass_2_3"></region>
