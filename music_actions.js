@@ -45,6 +45,8 @@ function turnOff(instrumentIndex) {
   ).style.backgroundColor = "#FF0000";
 
   highlight(instrumentIndex);
+
+  gestureReaction(instrumentIndex, "down");
 }
 
 function turnOn(instrumentIndex) {
@@ -59,6 +61,17 @@ function turnOn(instrumentIndex) {
   
   highlight(instrumentIndex);
 
+  gestureReaction(instrumentIndex, "up");
+  
+}
+
+// The part below is used for gesture reactions and displaying icons
+function  gestureReaction(instrumentIndex, gesture) {
+  var reaction = document.getElementById(`image_reaction_${instrumentIndex}_${gesture}`);
+  reaction.style.display = 'block';
+  setTimeout(function(){
+    reaction.style.display = 'none';
+  }, 1500);
 }
 
 // The part below is used for highlighting when an action happens
