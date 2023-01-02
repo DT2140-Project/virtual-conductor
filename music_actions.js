@@ -21,6 +21,8 @@ function setIntensity(instrumentIndex, intensity) {
     `indicator_${instrumentIndex}`
   ).innerHTML = `${intensity}`;
   if (instrument.isPlaying) iMusic.select(`intensity_${instrumentIndex}`, intensity);
+
+  highlight(instrumentIndex);
 }
 
 function setVolume(instrumentIndex, volume) {
@@ -41,6 +43,8 @@ function turnOff(instrumentIndex) {
   document.getElementById(
     `indicator_${instrumentIndex}`
   ).style.backgroundColor = "#FF0000";
+
+  highlight(instrumentIndex);
 }
 
 function turnOn(instrumentIndex) {
@@ -52,4 +56,18 @@ function turnOn(instrumentIndex) {
   document.getElementById(
     `indicator_${instrumentIndex}`
   ).style.backgroundColor = "#00FF00";
+  
+  highlight(instrumentIndex);
+
+}
+
+// The part below is used for highlighting when an action happens
+function highlight(instrumentIndex) {
+  var indicator = document.getElementById(`indicator_${instrumentIndex}`);
+  indicator.style.fontSize="50px";
+  indicator.style.height="20%";
+  setTimeout(function(){
+    indicator.style.fontSize="20px";
+    indicator.style.height="10%";
+  }, 1500);
 }
