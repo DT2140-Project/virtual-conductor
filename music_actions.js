@@ -23,6 +23,11 @@ function setIntensity(instrumentIndex, intensity) {
   if (instrument.isPlaying) iMusic.select(`intensity_${instrumentIndex}`, intensity);
 
   highlight(instrumentIndex);
+
+  if(intensity==1) 
+    gestureReaction(instrumentIndex, "pointer");
+  else  if(intensity==2) 
+    gestureReaction(instrumentIndex, "v2");
 }
 
 function setVolume(instrumentIndex, volume) {
