@@ -30,6 +30,7 @@ function onResults(results) {
         } else {
           gesture.action(instrumentIndex);
         }
+        if (gesture.image != "") gestureReaction(instrumentIndex, gesture.image)
         drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
           color: gesture.color,
           lineWidth: 5,
@@ -41,23 +42,21 @@ function onResults(results) {
   }
 
 const Gestures = {
-    none: {color: "#FFFFFF", action: function(instrumentIndex) {
-        
-    }},
-    pinch: {color: "#0000FF", action: function(instrumentIndex, volume) {
+    none: {image: "", color: "#FFFFFF", action: function(instrumentIndex) {}},
+    pinch: {image: "pinch", color: "#0000FF", action: function(instrumentIndex, volume) {
       setVolume(instrumentIndex, volume)
     }},
-    thumbUp: {color: "#00FF00", action: function(instrumentIndex) {
+    thumbUp: {image: "up", color: "#00FF00", action: function(instrumentIndex) {
         startPlaying()
         turnOn(instrumentIndex)
     }},
-    thumbDown: {color: "#FF0000", action: function(instrumentIndex) {
+    thumbDown: {image: "down", color: "#FF0000", action: function(instrumentIndex) {
         turnOff(instrumentIndex)
     }},
-    countOne: {color: "#FFFF00", action: function(instrumentIndex) {
+    countOne: {image: "pointer", color: "#FFFF00", action: function(instrumentIndex) {
         setIntensity(instrumentIndex, 1);
     }},
-    countTwo: {color: "#00FFFF", action: function(instrumentIndex) {
+    countTwo: {image: "V2", color: "#00FFFF", action: function(instrumentIndex) {
         setIntensity(instrumentIndex, 2);
     }},
     countThree: {color: "#FF00FF", action: function(instrumentIndex) {
@@ -175,20 +174,6 @@ function parseHandGesture(landmarks) {
     )
   ) {
     return Gestures.countTwo;
-  }
-  if (
-    isCountThree(
-      distIndexJointToThumb,
-      distIndexJointToIndex,
-      distMiddleJointToMiddle,
-      distRingJointToRing,
-      distLittleJointToLittle,
-      indexIsUpright,
-      middleIsUpright,
-      ringIsUpright
-    )
-  ) {
-    return Gestures.countThree;
   }
 
   return Gestures.none;

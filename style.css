@@ -77,14 +77,15 @@ body {
   display: grid;
   place-items: center;
   font-size: 20px;
+  transition: height 0.3s, font-size 0.3s;
 }
 
 .volume_bar_container {
   position: absolute;
   top: 25%;
   right: 5%;
-  aspect-ratio: 1 / 5;
-  height: 50%;
+  aspect-ratio: 1 / 10;
+  height: 40%;
   border-radius: 1em;
   background-color: #ffffff;
   opacity: 0.7;
@@ -93,6 +94,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   overflow: hidden;
+  transition: height 0.2s, aspect-ratio 0.2s;
 }
 
 .volume_bar {
@@ -107,6 +109,11 @@ body {
   z-index: -1;
 }
 
+.volume_num {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
 .image_reaction {
   position: absolute;
   right: 5%;
@@ -114,4 +121,6 @@ body {
   filter: invert(1);
   height: 50px;
   width: 50px;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
