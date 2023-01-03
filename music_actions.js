@@ -40,6 +40,8 @@ function setVolume(instrumentIndex, volume) {
   const volumeNum = volumeBarContainer.getElementsByClassName("volume_num")[0]
   volumeNum.innerHTML = `${volumeInPercent}`
   volumeBar.style.height = `${volumeInPercent}%`
+
+  gestureReaction(instrumentIndex, "pinch");
 }
 
 function turnOff(instrumentIndex) {
