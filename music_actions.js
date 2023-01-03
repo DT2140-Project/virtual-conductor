@@ -1,10 +1,10 @@
 var isPlaying = false;
 
 const instruments = [
-  { intensity: 1, isPlaying: true}, 
-  { intensity: 1, isPlaying: true}, 
-  { intensity: 1, isPlaying: true}, 
-  { intensity: 1, isPlaying: true}
+  { intensity: 1, isPlaying: false}, 
+  { intensity: 1, isPlaying: false}, 
+  { intensity: 1, isPlaying: false}, 
+  { intensity: 1, isPlaying: false}
 ];
 
 function startPlaying() {
