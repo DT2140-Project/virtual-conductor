@@ -21,13 +21,7 @@ function setIntensity(instrumentIndex, intensity) {
     `indicator_${instrumentIndex}`
   ).innerHTML = `${intensity}`;
   if (instrument.isPlaying) iMusic.select(`intensity_${instrumentIndex}`, intensity);
-
   highlight(instrumentIndex);
-
-  if(intensity==1) 
-    gestureReaction(instrumentIndex, "pointer");
-  else  if(intensity==2) 
-    gestureReaction(instrumentIndex, "v2");
 }
 
 function setVolume(instrumentIndex, volume) {
@@ -38,10 +32,16 @@ function setVolume(instrumentIndex, volume) {
   )
   const volumeBar = volumeBarContainer.getElementsByClassName("volume_bar")[0]
   const volumeNum = volumeBarContainer.getElementsByClassName("volume_num")[0]
+  volumeBarContainer.style.height = "50%"
+  volumeBarContainer.style.aspectRatio = "1 / 5"
   volumeNum.innerHTML = `${volumeInPercent}`
+  volumeNum.style.opacity = "1"
   volumeBar.style.height = `${volumeInPercent}%`
-
-  gestureReaction(instrumentIndex, "pinch");
+  setTimeout(function(){
+    volumeBarContainer.style.height = "40%"
+    volumeBarContainer.style.aspectRatio = "1 / 10"
+    volumeNum.style.opacity = "0"
+  }, 1500);
 }
 
 function turnOff(instrumentIndex) {
@@ -50,10 +50,7 @@ function turnOff(instrumentIndex) {
   document.getElementById(
     `indicator_${instrumentIndex}`
   ).style.backgroundColor = "#FF0000";
-
   highlight(instrumentIndex);
-
-  gestureReaction(instrumentIndex, "down");
 }
 
 function turnOn(instrumentIndex) {
@@ -65,25 +62,16 @@ function turnOn(instrumentIndex) {
   document.getElementById(
     `indicator_${instrumentIndex}`
   ).style.backgroundColor = "#00FF00";
-  
   highlight(instrumentIndex);
-
-  gestureReaction(instrumentIndex, "up");
 }
 
 // The part below is used for gesture reactions and displaying icons
-function  gestureReaction(instrumentIndex, gesture) {
-  // Deactivating previous reactions
-  const collection = document.getElementsByClassName('image_reaction');
-  for (let i = 0; i < collection.length; i++) {
-    collection[i].style.display = 'none';
-  }
-
-
-  var reaction = document.getElementById(`image_reaction_${instrumentIndex}_${gesture}`);
-  reaction.style.display = 'block';
+function  gestureReaction(instrumentIndex, gestureName) {
+  var reaction = document.getElementById(`image_reaction_${instrumentIndex}`);
+  reaction.src = `images/gestures/${gestureName}.svg`
+  reaction.style.opacity = "1";
   setTimeout(function(){
-    reaction.style.display = 'none';
+  reaction.style.opacity = "0";
   }, 1500);
 }
 
