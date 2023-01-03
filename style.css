@@ -95,7 +95,7 @@ body {
   overflow: hidden;
 }
 
-.volume_bar{
+.volume_bar {
   background-color: #aaaaaa;
   position: absolute;
   bottom: 0;
@@ -105,4 +105,13 @@ body {
   box-sizing: border-box;
   transform-origin: bottom;
   z-index: -1;
+}
+
+.image_reaction {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  filter: invert(1);
+  height: 50px;
+  width: 50px;
 }

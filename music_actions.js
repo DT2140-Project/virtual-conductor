@@ -23,6 +23,11 @@ function setIntensity(instrumentIndex, intensity) {
   if (instrument.isPlaying) iMusic.select(`intensity_${instrumentIndex}`, intensity);
 
   highlight(instrumentIndex);
+
+  if(intensity==1) 
+    gestureReaction(instrumentIndex, "pointer");
+  else  if(intensity==2) 
+    gestureReaction(instrumentIndex, "v2");
 }
 
 function setVolume(instrumentIndex, volume) {
@@ -45,6 +50,8 @@ function turnOff(instrumentIndex) {
   ).style.backgroundColor = "#FF0000";
 
   highlight(instrumentIndex);
+
+  gestureReaction(instrumentIndex, "down");
 }
 
 function turnOn(instrumentIndex) {
@@ -59,6 +66,23 @@ function turnOn(instrumentIndex) {
   
   highlight(instrumentIndex);
 
+  gestureReaction(instrumentIndex, "up");
+}
+
+// The part below is used for gesture reactions and displaying icons
+function  gestureReaction(instrumentIndex, gesture) {
+  // Deactivating previous reactions
+  const collection = document.getElementsByClassName('image_reaction');
+  for (let i = 0; i < collection.length; i++) {
+    collection[i].style.display = 'none';
+  }
+
+
+  var reaction = document.getElementById(`image_reaction_${instrumentIndex}_${gesture}`);
+  reaction.style.display = 'block';
+  setTimeout(function(){
+    reaction.style.display = 'none';
+  }, 1500);
 }
 
 // The part below is used for highlighting when an action happens
