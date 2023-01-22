@@ -68,7 +68,7 @@ function turnOn(instrumentIndex) {
 // The part below is used for gesture reactions and displaying icons
 function  gestureReaction(instrumentIndex, gestureName) {
   var reaction = document.getElementById(`image_reaction_${instrumentIndex}`);
-  reaction.src = `images/gestures/${gestureName}.svg`
+  reaction.src = `/images/gestures/${gestureName}.svg`
   reaction.style.opacity = "1";
   setTimeout(function(){
   reaction.style.opacity = "0";

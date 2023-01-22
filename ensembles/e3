@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script> 
+    $(function(){
+      $("#includedContent").load("/conductor.html"); 
+    });
+    </script> 
+  </head> 
+
+  <body> 
+     <div id="includedContent"></div>
+     <script src="/imusic_091.js" data-music-structure="imusic3.xml"></script>
+  </body> 
+</html>
+

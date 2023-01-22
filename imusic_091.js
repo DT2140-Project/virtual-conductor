@@ -43,7 +43,7 @@
 			
 			// find next section
 			defaultInstance.sections.forEach(obj => {
-				if(inArray(selector, obj.parameters.classList)){
+				if(inArray(obj.parameters.id, selector)){
 					this.sections.push(obj);
 					this.objects.push(obj);
 					this.string = selector[0];
@@ -6293,6 +6293,8 @@
 			
 			// get new selection
 			var selection = new Selection().selectForPlayback(selector);
+			console.log("test");
+			console.log(selection);
 
 			// check if the selection includes a section
 			if(selection.sections.length){
@@ -7103,7 +7105,7 @@
   	Data.loadXML = function(src, el){
 
 	  	if(src){
-		  	fetch(src)
+		  	fetch('/xml/' + src)
 		  	.then(response => response.text())
 		  	.then(xml => {
 			  	let parser = new DOMParser();
@@ -7346,6 +7348,7 @@
 
 
 		if(musicStructure){
+			console.log(musicStructure);
 			let xmlDoc = document.querySelector(musicStructure);
 
 			if(xmlDoc){

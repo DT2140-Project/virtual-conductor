@@ -53,14 +53,14 @@ const Gestures = {
     thumbDown: {image: "down", color: "#FF0000", action: function(instrumentIndex) {
         turnOff(instrumentIndex)
     }},
-    countOne: {image: "pointer", color: "#FFFF00", action: function(instrumentIndex) {
+    countOne: {image: "fingers_up_1", color: "#FFFF00", action: function(instrumentIndex) {
         setIntensity(instrumentIndex, 1);
     }},
-    countTwo: {image: "V2", color: "#00FFFF", action: function(instrumentIndex) {
+    countTwo: {image: "fingers_up_2", color: "#00FFFF", action: function(instrumentIndex) {
         setIntensity(instrumentIndex, 2);
     }},
-    countThree: {color: "#FF00FF", action: function(instrumentIndex) {
-        
+    countThree: {image: "fingers_up_3", color: "#FF00FF", action: function(instrumentIndex) {
+      setIntensity(instrumentIndex, 3);
     }},
 }
 
@@ -174,6 +174,20 @@ function parseHandGesture(landmarks) {
     )
   ) {
     return Gestures.countTwo;
+  }
+  if (
+    isCountThree(
+      distIndexJointToThumb,
+      distIndexJointToIndex,
+      distMiddleJointToMiddle,
+      distRingJointToRing,
+      distLittleJointToLittle,
+      indexIsUpright,
+      middleIsUpright,
+      ringIsUpright
+    )
+  ) {
+    return Gestures.countThree;
   }
 
   return Gestures.none;
