@@ -6,13 +6,13 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="style.css"
+      href="/styles/style.css"
       crossorigin="anonymous"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="instruction.css"
+      href="/styles/instruction.css"
       crossorigin="anonymous"
     />
 
@@ -32,6 +32,9 @@
       src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
       crossorigin="anonymous"
     ></script>
+    <script type="module" src="/hand_gestures.js"></script>
+    <script src="/music_actions.js"></script>
+    <script src="/instruction.js"></script>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -69,7 +72,7 @@
     <div class="instrument_grid">
       <div class="instrument_row">
         <div class="instrument_area" id="instrument_area_0">
-          <img class="instrument_image" src="images/instruments/guitar.svg" alt="Guitar" />
+          <img class="instrument_image" src="/images/instruments/guitar.svg" alt="Guitar" />
           <div id="indicator_0" class="instrument_status_indicator">1</div>
           <div id="volume_0" class="volume_bar_container">
             <div class="volume_num">50</div> 
@@ -78,7 +81,7 @@
           <img id="image_reaction_0" class="image_reaction"/>
         </div>
         <div class="instrument_area" id="instrument_area_1">
-          <img class="instrument_image" src="images/instruments/drums.svg" alt="Drums" />
+          <img class="instrument_image" src="/images/instruments/drums.svg" alt="Drums" />
           <div id="indicator_1" class="instrument_status_indicator">1</div>
           <div id="volume_1" class="volume_bar_container">
             <div class="volume_num">50</div> 
@@ -91,7 +94,7 @@
         <div class="instrument_area" id="instrument_area_2">
           <img
             class="instrument_image"
-            src="images/instruments/piano-top-view.svg"
+            src="/images/instruments/piano-top-view.svg"
             alt="Piano"
           />
           <div id="indicator_2" class="instrument_status_indicator">1</div>
@@ -104,7 +107,7 @@
         <div class="instrument_area" id="instrument_area_3">
           <img
             class="instrument_image"
-            src="images/instruments/bass-guitar.svg"
+            src="/images/instruments/bass-guitar.svg"
             alt="Bass Guitar"
           />
           <div id="indicator_3" class="instrument_status_indicator">1</div>
@@ -127,33 +130,27 @@
           </tr>
           <tr class="table_content">
             <td>Thumbs up</td>
-            <td><img src="images/gestures/up.svg" class="gesture_image"/></td>
+            <td><img src="/images/gestures/up.svg" class="gesture_image" /></td>
             <td>Turn the instrument on</td>
           </tr>
           <tr class="table_content">
             <td>Thumbs down</td>
-            <td><img src="images/gestures/down.svg" class="gesture_image"/></td>
+            <td><img src="/images/gestures/down.svg" class="gesture_image" /></td>
             <td>Turn the instrument off</td>
           </tr>
           <tr class="table_content">
-            <td>Index finger up</td>
+            <td>Finger(s) held up</td>
             <td>
-              <img
-                src="images/gestures/pointer.svg"
-                class="gesture_image"
-              />
+              <img src="/images/gestures/fingers_up_1.svg" class="gesture_image" />
+              <img src="/images/gestures/fingers_up_2.svg" class="gesture_image" />
+              <img src="/images/gestures/fingers_up_3.svg" class="gesture_image" />
             </td>
-            <td>Switch to instrument style 1</td>
-          </tr>
-          <tr class="table_content">
-            <td>Index and long finger up</td>
-            <td><img src="images/gestures/V2.svg" class="gesture_image"/></td>
-            <td>Switch to instrument style 2</td>
+            <td>Switch to instrument style 1, 2 or 3, <br />depending on the number of fingers held up</td>
           </tr>
           <tr class="table_content">
             <td>Pinch</td>
-            <td><img src="images/gestures/pinch.svg" class="gesture_image"/></td>
-            <td>Change instrument volume</td>
+            <td><img src="/images/gestures/pinch.svg" class="gesture_image" /></td>
+            <td>Set instrument volume</td>
           </tr>
         </table>
 
@@ -168,8 +165,3 @@
     </div>
   </body>
 </html>
-<script type="module" src="hand_gestures.js"></script>
-<script src="imusic_091.js" data-music-structure="imusic.xml"></script>
-
-<script src="music_actions.js"></script>
-<script src="instruction.js"></script>

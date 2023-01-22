@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imusic version="1.0" tempo="125" audioPath="/audio/e3" suffix="mp3" timeSign="4/4" loopLength="4" showGUI="false">
+    <arrangement id="A">
+        <track tags="instr_0" fadeTime="100" select-group="intensity_0" select-value="0" src="silence" selected="true" volume="0.5"></track>
+        <track tags="instr_0" fadeTime="100" select-group="intensity_0" select-value="1" src="guitar_1" volume="0.5"></track>
+        <track tags="instr_0" fadeTime="100" select-group="intensity_0" select-value="2" src="guitar_2" volume="0.5"></track>
+        <track tags="instr_0" fadeTime="100" select-group="intensity_0" select-value="3" src="guitar_3" volume="0.5"></track>
+        <track tags="instr_1" fadeTime="100" select-group="intensity_1" select-value="0" src="silence" selected="true" volume="0.5"></track>
+        <track tags="instr_1" fadeTime="100" select-group="intensity_1" select-value="1" src="drums_1" volume="0.5"></track>
+        <track tags="instr_1" fadeTime="100" select-group="intensity_1" select-value="2" src="drums_2" volume="0.5"></track>
+        <track tags="instr_1" fadeTime="100" select-group="intensity_1" select-value="3" src="drums_3" volume="0.5"></track>
+        <track tags="instr_2" fadeTime="100" select-group="intensity_2" select-value="0" src="silence" selected="true" volume="0.5"></track>
+        <track tags="instr_2" fadeTime="100" select-group="intensity_2" select-value="1" src="piano_1" volume="0.5"></track>
+        <track tags="instr_2" fadeTime="100" select-group="intensity_2" select-value="2" src="piano_2" volume="0.5"></track>
+        <track tags="instr_2" fadeTime="100" select-group="intensity_2" select-value="3" src="piano_3" volume="0.5"></track>
+        <track tags="instr_3" fadeTime="100" select-group="intensity_3" select-value="0" src="silence" selected="true" volume="0.5"></track>
+        <track tags="instr_3" fadeTime="100" select-group="intensity_3" select-value="1" src="bass_1" volume="0.5"></track>
+        <track tags="instr_3" fadeTime="100" select-group="intensity_3" select-value="2" src="bass_2" volume="0.5"></track>
+        <track tags="instr_3" fadeTime="100" select-group="intensity_3" select-value="3" src="bass_3" volume="0.5"></track>
+    </arrangement>
+</imusic>
