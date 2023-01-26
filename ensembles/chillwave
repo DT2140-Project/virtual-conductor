@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script> 
+    $(function(){
+      $("#includedContent").load("/conductor.html");
+      $("#instrumentOverlay").load("/instrumentOverlays/gdpb.html");
+    });
+    </script> 
+  </head> 
+
+  <body> 
+     <div id="includedContent"></div>
+     <div id="instrumentOverlay"></div>
+     <script src="/imusic_091.js" data-music-structure="chillwave.xml"></script>
+  </body> 
+</html>
+
